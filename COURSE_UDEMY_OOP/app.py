@@ -62,9 +62,11 @@
 # ===========практика, створення класу =============================
 import os
 from pathlib import Path
+
 # from pathlib import Path
 # x = Path(__file__)  ##  маємо поточний файл
 # print(x)
+
 
 # class Path:
 #     def __init__(self):
@@ -82,29 +84,55 @@ from pathlib import Path
 # # print(path.CWD)
 # print(path.current)
 # =============методи операторів, перегрузкеа операторів================
+# class Path:
+#     def __init__(self, path):
+#         self.current = path or os.path.dirname(__file__)
+#     def parent(self):
+#         self.current = os.path.dirname(self.current)
+#         return self
+#     def get_path(self):
+#         return self.current
+#     # def __add__(self, obj):
+#     #     self.current = os.path.join(self.current, obj)
+#     #     return self
+#     # def __add__(self, obj):
+#     #     return Path(os.path.join(self.current, obj))
+#     def __add__(self, obj):
+#         if isinstance(obj, str):
+#             return Path(os.path.join(self.current, obj))
+#         elif isinstance(obj, Path):
+#             return Path(os.path.join(self.current, obj.current))
+#     def __str__(self):
+#         return self.current
+# path = Path("C:\\Users\\nkv57\\Desktop\\COURSE_UDEMY_OOP")
+# # path2 = path + 'test'
+# path2 = path + Path('user')
+# # print(path + 'test')
+# print(path)
+# print(path2)
+# ======перегрузка 'правих' методів операторів=======================
 class Path:
     def __init__(self, path):
         self.current = path or os.path.dirname(__file__)
+
     def parent(self):
         self.current = os.path.dirname(self.current)
         return self
+
     def get_path(self):
         return self.current
-    # def __add__(self, obj):
-    #     self.current = os.path.join(self.current, obj)
-    #     return self
-    # def __add__(self, obj):
-    #     return Path(os.path.join(self.current, obj))
+
     def __add__(self, obj):
-        if isinstance(obj, str):
-            return Path(os.path.join(self.current, obj))
-        elif isinstance(obj, Path):
-            return Path(os.path.join(self.current, obj.current))
+        return Path(os.path.join(self.current, obj))
+
+    def __radd__(self, obj):
+        return Path(os.path.join(self.current, obj))
+
     def __str__(self):
         return self.current
+
+
 path = Path("C:\\Users\\nkv57\\Desktop\\COURSE_UDEMY_OOP")
-# path2 = path + 'test'
-path2 = path + Path('user')
-# print(path + 'test')
+path2 = "user" + path
 print(path)
 print(path2)
