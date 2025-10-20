@@ -123,9 +123,13 @@ class Path:
         return self.current
 
     def __add__(self, obj):
+        if not isinstance(obj, str):
+            return NotImplemented
         return Path(os.path.join(self.current, obj))
 
     def __radd__(self, obj):
+        if not isinstance(obj, str):
+            return NotImplemented
         return Path(os.path.join(self.current, obj))
 
     def __str__(self):
