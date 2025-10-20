@@ -93,12 +93,18 @@ class Path:
     # def __add__(self, obj):
     #     self.current = os.path.join(self.current, obj)
     #     return self
+    # def __add__(self, obj):
+    #     return Path(os.path.join(self.current, obj))
     def __add__(self, obj):
-        return Path(os.path.join(self.current, obj))
+        if isinstance(obj, str):
+            return Path(os.path.join(self.current, obj))
+        elif isinstance(obj, Path):
+            return Path(os.path.join(self.current, obj.current))
     def __str__(self):
         return self.current
 path = Path("C:\\Users\\nkv57\\Desktop\\COURSE_UDEMY_OOP")
-path2 = path + 'test'
+# path2 = path + 'test'
+path2 = path + Path('user')
 # print(path + 'test')
 print(path)
 print(path2)
