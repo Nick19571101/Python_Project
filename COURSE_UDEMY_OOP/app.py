@@ -135,6 +135,11 @@ class Path:
     def __str__(self):
         return self.current
 
+    def __len__(self):
+        return len(self.current)
+    def __bool__(self):
+        return bool(len(self))
+
 
 path = Path("C:\\Users\\nkv57\\Desktop\\COURSE_UDEMY_OOP")
 path2 = "user" + path
