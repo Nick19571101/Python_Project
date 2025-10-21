@@ -132,16 +132,31 @@ class Path:
             return NotImplemented
         return Path(os.path.join(self.current, obj))
 
-    def __str__(self):
-        return self.current
-
     def __len__(self):
         return len(self.current)
+
     def __bool__(self):
         return bool(len(self))
+
+    def __eq__(self, obj):
+        return self.current == obj.current
+
+    def __contains__(self, obj):
+        return obj in self.current
+
+    def __str__(self):
+        return self.current
 
 
 path = Path("C:\\Users\\nkv57\\Desktop\\COURSE_UDEMY_OOP")
 path2 = "user" + path
 print(path)
 print(path2)
+#  ===========перегрузка операторів порівняння об'єктів===============
+"""оператор is перевіряє однаковість ідетенфікаторів об'єктів.
+повертає булево значення
+"""
+print(path is path)  # True
+print(path == path2)  # False
+print(path.__eq__(path2))  # False
+print("user" in path2)
